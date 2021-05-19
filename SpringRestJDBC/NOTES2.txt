@@ -1,0 +1,48 @@
+==>while using @Controller, the return type is generally ModelAndView object.
+   If its a String, it would be considered as a view name.
+
+==>While using @RestController, the return type is either ResponseEntity or HttpStatus.
+   If its a String, it would be considered as a simple String.
+
+==>The @RestController annotation in Spring MVC is nothing but a combination of @Controller and 
+   @ResponseBody annotation.
+   
+==> The job of @Controller is to create a Map of model object and find a view but @RestController 
+    simply return the object and object data is directly written into HTTP response as JSON or XML.
+    
+==> @RequestBody and @ResponseBody annotations while working with @RestController. 
+    These annotations are used to bind the HTTP request/response body with a domain object in method parameter 
+    or return type. Behind the scenes, these annotation uses HTTP Message converters to convert the body of 
+    HTTP request/response to domain objects.
+    i) @RequestBody : If a method parameter is annotated with @RequestBody, Spring will bind the incoming HTTP 
+       request body (which can be JSON/XML/Other) to that parameter. While doing that, Spring will 
+       [behind the scenes] use HTTP Message converters to convert the HTTP request body into domain 
+       object [deserialize request body to domain object], based on Accept header present in request.
+
+      => The Accept header is used by HTTP clients [browsers] to tell the server what content types they’ll accept.
+      => The server sends back the response, which will include a Content-Type header telling the client what the 
+         content type of the returned content actually is. In case of POST or PUT request, browsers do send data 
+         in request, so they actually send content-type as well.
+         
+         		@RequestMapping(value="/user/create", method=RequestMethod.POST)
+                public ResponseEntity<Void> createUser(@RequestBody User user){.......}
+                
+         ****ResponseEntity (used in above example) represents the entire HTTP response.
+         
+     ii) @ResponseBody : If a method is annotated with @ResponseBody, Spring will bind the return value to 
+          outgoing HTTP response body. While doing that, Spring will [behind the scenes] use HTTP Message 
+          converters to convert the return value to HTTP response body [serialize the object to response body], 
+          based on Content-Type present in request HTTP header.
+                  @RequestMapping(value = "/user/all", method = RequestMethod.GET)
+                  @ResponseBody
+				  public List<User> listAllUsers() {.....}
+				  
+		   This is the controller method to handle typical HTTP GET request [for URL /user/all] to retrieve all 
+		   users. In this case, Spring will convert the user list into appropriate format [JSON/XML/Other] using 
+		   available converters, based on content type.
+		   
+	 NOTE : As from Spring 4, @RestController is the preferred way to achieve the same functionality earlier 
+	 provided by @ResponseBody. Under the hood, @RestController is @Controller+@ResponseBody, and it avoids 
+	 the need of prefixing every method with @ResponseBody.
+
+

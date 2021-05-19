@@ -1,0 +1,11 @@
+package com.example.REST.user;
+
+import lombok.Builder;
+
+@Data
+@Builder
+public class FilteringBean {
+String value1;
+String value2;
+String value3;
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SpringBootHelloWorld/src/main/resources/application.properties.html&apos; to &apos;application.properties&apos;" description="Rename resource &apos;application.properties.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/application.properties.html" name="application.properties" stamp="1609048888899" updateReferences="true"/>
+</session>

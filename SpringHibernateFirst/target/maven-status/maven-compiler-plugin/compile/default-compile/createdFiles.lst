@@ -1,0 +1,4 @@
+com\candidjava\springhibernate\dao\StudentDAOImpl.class
+com\candidjava\springhibernate\model\Student.class
+com\candidjava\springhibernate\dao\StudentDAO.class
+com\candidjava\springhibernate\controller\RegisterController.class

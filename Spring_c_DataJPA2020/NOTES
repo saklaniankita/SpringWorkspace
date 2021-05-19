@@ -1,0 +1,11 @@
+If we look at the methods in repository class of SpringJPA, we will  notice that all the methods are quite generalized
+and repetitive . It can be taken care by introducing predefined repositories like JpaRepository & CRUDRepository.
+We can make use of already defined and implemented methods in these repositories to achieve almost everything
+
+
+JpaRepository is an interface
+CRUDRepository is a super interface of JpaRepository
+
+You can find all implemented methods like find(), findAll(), findByid(), save(), etc in javadoc
+
+

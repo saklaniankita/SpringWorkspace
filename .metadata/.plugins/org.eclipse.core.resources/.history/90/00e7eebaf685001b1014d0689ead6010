@@ -1,0 +1,5 @@
+package com.example.RESTapp.JPArepository;
+
+public class JpaUser {
+
+}

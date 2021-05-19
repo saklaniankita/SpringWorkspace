@@ -1,0 +1,10 @@
+Step 1: First request will be received by DispatcherServlet
+Step 2: DispatcherServlet will take the help of HandlerMapping and get to know the Controller class name(within the 
+        package mentioned in <context:component-scan> tag) associated with the given request
+Step 3: So request transfer to the Controller, and then controller will process the request by executing 
+        appropriate methods and returns ModeAndView object (contains Model data and View name) back to the 
+        DispatcherServlet
+Step 4: Now DispatcherServlet send the model object to the ViewResolver to get the actual view page by adding prefix 
+        and suffix mentioned in view resolver bean
+Step 5: Finally DispatcherServlet will pass the Model object to the View page to display the result
+

@@ -1,0 +1,4 @@
+com\candidjava\springmvc\controller\StudentController.class
+com\candidjava\springmvc\bean\StudentBean.class
+com\candidjava\springmvc\bean\AddressBean.class
+com\candidjava\springmvc\controller\RestStudentController.class

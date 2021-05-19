@@ -1,0 +1,6 @@
+spring.messages.basename = messages
+security.user.name = user
+security.user.password = password
+
+<!-- spring.security.user.name=root
+spring.security.user.password=Root1234 -->

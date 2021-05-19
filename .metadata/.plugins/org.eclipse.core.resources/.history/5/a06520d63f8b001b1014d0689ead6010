@@ -1,0 +1,4 @@
+insert into JpaUser values(1001, sysdate(), 'Adam');
+insert into JpaUser values(1002, sysdate(), 'Jack');
+insert into JpaUser values(1003, sysdate(), 'Jill');
+insert into JpaUser values(1004, sysdate(), 'Henry');

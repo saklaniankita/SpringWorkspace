@@ -1,0 +1,6 @@
+==>Right Click on project-> Properties -> Project Facets -> Check Java version
+==>Check java version in Java build path
+==>Maven->update project
+==>Add correct plugins in pom.xml and then Maven->update project
+==>while creating a maven project if you dont get src/main/java package under Java Resources then go to 
+   Java Build Path-> Source tab ->Add folder->Apply

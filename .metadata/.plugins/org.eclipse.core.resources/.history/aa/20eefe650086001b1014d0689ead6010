@@ -1,0 +1,123 @@
+package com.example.RESTapp.JPArepository;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.example.RESTapp.user.User;
+import com.example.RESTapp.user.UserNotFoundException;
+import com.example.RESTapp.user.UserService;
+
+@RestController
+public class UserJPAController {
+
+	@Autowired
+	UserJPARepository userJpaRepository;
+	
+	@Autowired
+	private MessageSource messageSource;
+
+	@GetMapping("/jpa/users")
+	@ResponseStatus(value = HttpStatus.ACCEPTED)
+	public List<JpaUser> getAllUsers() {
+		return userJpaRepository.findAll();
+	}
+
+	/**
+	 * Using HATEAOS = Hypertext As The Engine Of Application State.
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/jpa/users/{id}")
+	public EntityModel<Optional<JpaUser>> findUserById(@PathVariable Integer id) {
+		Optional<JpaUser> user = userJpaRepository.findById(id);
+		if(!user.isPresent())
+			throw new UserNotFoundException("No user found by id: "+id);
+		
+		EntityModel<Optional<JpaUser>> entityModel = EntityModel.of(user);
+		WebMvcLinkBuilder linkTo = 
+				linkTo(methodOn(this.getClass()).getAllUsers());
+		entityModel.add(linkTo.withRel("all-users"));
+
+		return entityModel;
+	}
+//	
+//	
+//	@GetMapping("/users/{id}/{name}")
+//	public User findUserByIdAndName(@PathVariable Integer id, @PathVariable String name) {
+//		User user = userJpaRepository.findUserByIdAndName(id, name);
+//		if(user == null)
+//			throw new UserNotFoundException("No user found with id: "+id+" and name: "+name);
+//		return user;
+//	}
+//	
+//	@GetMapping("/usersByName")
+//	public ResponseEntity<List<User>> findUsersByName(@RequestParam(name = "userName") String name) throws Exception{
+//		List<User> users = userJpaRepository.findUsersBySameName(name);
+//		if(users.isEmpty())
+//			throw new UserNotFoundException("NO User found by name "+name);
+//		return ResponseEntity.ok(users);
+//		//return users;
+//		
+//	}
+//
+//	@PostMapping("/users")
+//	public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
+//		User newUser = userJpaRepository.saveUser(user);
+////		return ResponseEntity.ok(newUser);
+//		
+//		URI location = ServletUriComponentsBuilder
+//		.fromCurrentRequest()
+//		.path("/{id}")
+//		.buildAndExpand(newUser.getId()).toUri();
+//		
+//         //It will return Http status as CREATED 
+//		 return ResponseEntity.created(location).build();
+//	}
+//	
+//	
+//	@DeleteMapping("/users/{id}")
+//	public ResponseEntity<User> deleteUser(@PathVariable Integer id){
+//		User deletedUser = userJpaRepository.deleteById(id);
+//		if(deletedUser == null)
+//			throw new UserNotFoundException("User with id "+id+" not found");
+//		return ResponseEntity.ok(deletedUser);
+//	}
+//	
+////	@GetMapping("/hello-world-internationalized")
+////	public String helloWorldInternationalized(@RequestHeader(name="Accept-language", required = false) Locale locale) {
+////		//return "Good Morning";
+////		return messageSource.getMessage("good.morning.message", null, locale);
+////	}
+//	
+//	@GetMapping("/hello-world-internationalized")
+//	public String helloWorldInternationalized() {
+//		//return "Good Morning";
+//		return messageSource.getMessage("good.morning.message", null, LocaleContextHolder.getLocale());
+//	}
+}

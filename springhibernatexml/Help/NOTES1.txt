@@ -1,0 +1,55 @@
+@Component -> used in Spring2.5. It was a general annotation to replace <bean> tag in dispatcher servlet.This functionality 
+was enabled and disabled using <context:component-scan> tag. It is more specifically divided into 
+@Controller, @Service,@Repository in later versions of spring.
+
+@Controller -> Instead of using @Component on a controller class in Spring MVC, we use @Controller 
+, which is more readable and appropriate. DispatcherServlet will look for @RequestMapping on classes 
+which are annotated using @Controller but not with @Component
+
+@Service -> A Spring bean in service layer should be annotated using @Service instead of @Component
+
+@Repository -> a spring bean in persistence layer should be annotated with @Repository annotation instead of @Component.
+it catches any platform-specific exceptions and then rethrows as one of Spring’s unchecked data access exceptions.
+Though for that you also need to declare "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
+as Spring bean in your application context.
+
+@Transactional -> 1) it is used in service layer for transaction management in the DAO layer. 
+	2) We need to mention transaction management bean "org.springframework.orm.hibernate4.HibernateTransactionManager" 
+	in the container that further refers to the session factory bean. Also, <tx:annotation-driven/> needs to be mentioned 
+	in dispatcher-servlet while using @Transactional
+	3) This annotation assures that all operations in DAO layers happens within a single transaction and is 
+	committed/rolled back only after all operations are successfully completed.
+	4) If we use @Transactional annotation, then do not need to begin or commit the transaction in DAO layer 
+	because it is being already handled by this annotation.
+	5) Similarly we do not need to open or close the session. we can directly call getCurrentSession() and use it.
+
+===> hibernate.hbm2ddl.auto=update : this automatically creates tables in database and we do NOT to create tables beforehand
+
+=> Interfaces and implementing classes in DAO and service layers so that if any changes are made to implementing classes 
+   no change has to be made in rest of the code. we write as : private EmployeeDAO employeeDAO;
+   and NOT EmployeeDAO employeeDAO =new EmployeeDAOImpl();
+   
+==> <context:component-scan base-package="com.candidjava.springmvc" />
+    Spring will search this package for annotations @component, @controller, @service, @repository and create a bean for each one
+    of these classes.  This is done in 2 scans of the classes - the first time it just searches for classes that need 
+    to become a bean and maps the injections it needs to be doing, and on the second scan it injects the beans.
+    
+==> <mvc:annotation-driven /> : It performs all the job as done by <context:component-scan>. But, mvc:annotation-driven does 
+    some extra job. This tag would registers the HandlerMapping(DefaultAnnotationHandlerMapping) and 
+    HandlerAdapter(AnnotationMethodHandlerAdapter) required to dispatch requests to your 
+    @Controllers.
+    The HandlerMapping is used to Maps a request to Handlers i.e. Controllers. For example: DefaultAnnotationHandlerMapping, 
+    SimpleUrlHandlerMapping, BeanNameUrlHandlerMapping. DefaultAnnotationHandlerMapping.
+    The HandlerAdapter is basically an interface which facilitates the handling of HTTP requests in a very flexible 
+    manner in Spring MVC. The DispatcherServlet doesn’t invoke the method directly – it basically serves as a bridge 
+    between itself and the handler objects, leading to a loosely coupling design.
+    
+==> transaction Manager bean refers to sessionfactory bean.
+    sessionfactory bean has three properties
+    1)datasource that further refers to DriverManagerDataSource bean that defines hibernate properties
+    2)annotated class that takes the list of annotated bean class because it is the only hibernate related class.
+    3)hibernateProperties that has key value<props></props>
+
+<bean id="employeeDao" class="com.candidjava.springmvc.dao.EmployeeDAOImpl" /> This bean is for autowiring purpose.
+We add @Autowire in .java file and this tag in dispatcher servlet to autowire
+

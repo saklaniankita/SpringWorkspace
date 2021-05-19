@@ -1,0 +1,11 @@
+com\autowire\logging\MyLoggingAspect.class
+com\autowire\service\AutowireService.class
+com\autowire\exception\NoScienceStudentException.class
+com\autowire\repository\CustomeRepositoryImpl.class
+com\autowire\bean\Student.class
+com\autowire\controller\AutowireController.class
+com\autowire\App.class
+com\autowire\repository\AutowireRepository.class
+com\autowire\repository\CustomRepository.class
+com\autowire\exception\StudException.class
+com\autowire\service\AutowireServiceImpl.class

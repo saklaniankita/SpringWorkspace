@@ -1,0 +1,32 @@
+=>In Pom.xml (Project Object Model), dependencies may further have "TRANSITIVE DEPENDENCIES"
+=>When you first create a maven project, the version that you find in the generatED POM.XML FILE IS 0.0.1-SNAPSHOT i.e the 
+project is still under development
+=>Each dependency has a group id , artifact id and a version
+=>BUILD LIFECYCLE
+ 1. mvn clean -> Target folder is cleaned (From eclipse we can directly run clean
+        From eclipse , right click->run as->maven Build-> type "clean" as Goal)
+
+ 2. mvn install runs all the commands sequentially as follows
+
+	Validate->Compile->Test->Package->Integration Test->Verify->Install
+	
+
+Validate - validates the project
+Compile -> Compiles the source code and test code to check if there is any compilation error
+Test -> All unit tests are run
+Package -> putting all class files into a jar file/ Buildimg jar file
+Integration tests -> Integration tests are run
+install ->installing the jar into target folder
+
+**When we run mvn compile, then all three steps till compile are run. Similarly if we run mvn install, it will run all 
+commands till install
+
+
+3.  mvn deploy ->Installing the generated jar/war file to remote repository where it can be shared with other projects
+
+=>Dependencies  mentioned in pom.xml gets downloaded from central repository9https://mvnrepository.com/repos/central)
+ to local Maven repository of the project
+
+=> In a Maven Project, all source files files should eb in src/main/java folder
+	all test files should be in src/test/java folder
+	all resources like xml files, properties file should be in src/main/resources folder

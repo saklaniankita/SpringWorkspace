@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;RESTful-Webservice&apos; to &apos;RESTful-Webservice2021&apos;" description="Rename resource &apos;RESTful-Webservice&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/RESTful-Webservice" name="RESTful-Webservice2021" stamp="1611109791911" updateReferences="true"/>
+</session>

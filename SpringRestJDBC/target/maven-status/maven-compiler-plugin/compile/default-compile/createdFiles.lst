@@ -1,0 +1,3 @@
+com\candidjava\springJDBC\bean\AddressBean.class
+com\candidjava\springJDBC\controller\RestStudentController.class
+com\candidjava\springJDBC\dao\AddressDAO.class

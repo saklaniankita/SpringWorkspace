@@ -1,0 +1,19 @@
+package com.example.RESTapp.JPA;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Post {
+
+	@Id
+	@GeneratedValue
+	private int id;
+	private String description;
+	
+	@ManyToOne
+	private JpaUser user;
+
+}

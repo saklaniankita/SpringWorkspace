@@ -1,0 +1,11 @@
+spring.messages.basename = messages
+management.security.enabled = false
+spring.security.user.name = user
+spring.security.user.password = password
+
+
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.data.jpa.repositories.bootstrap-mode=default
+
+spring.jpa.show-sql = true
+spring.h2.console.enabled = true

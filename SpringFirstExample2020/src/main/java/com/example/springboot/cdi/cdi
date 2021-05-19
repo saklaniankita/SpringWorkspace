@@ -1,0 +1,7 @@
+Container & Dependency Injection
+CDI tried to standardized spring annotations (@Component, @Autowired, etc) as part of Java EE
+It used:
+	@Inject in place of @Autowired
+	@Named in place of @Component/@Qualifier
+We can use either cdi annotations which are part of JAVA EE or spring annotations. 
+There is no specific difference

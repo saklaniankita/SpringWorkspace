@@ -1,0 +1,4 @@
+spring.messages.basename = messages
+<!-- spring.security.user.name = ankita
+spring.security.user.password = august@27 -->
+server.port = 8081

@@ -1,0 +1,104 @@
+
+
+==>No dependency versions are required in a Spring boot application. We just have to mention the Spring boot
+   version in the <parent> tag. Dependencies version will be automatically taken care by Spring boot. It brings
+   a big difference because earlier in spring projects we must know include the versions of dependencies in pom.xml
+   and sometimes verisons of different jars might be incompatible. 
+
+==>@SpringBootApplication will usually be placed in the main package and all other components 
+    will be placed in packages under that package or else we can specify the name of  specific package
+    to scan : @SpringBootApplication(scanBasePackages = "com.example.myproject"). All other annotations
+    like @Controller,@Repository, @Transactional, etc must be under this package.
+    
+==> @SpringBootApplication : The @SpringBootApplication annotation is equivalent to using @Configuration, 
+    @EnableAutoConfiguration, and @ComponentScan OR <context:component-scan> tag in xml file. 
+    By default it scans the package and all its sub packages 
+    unless specific package name is mentioned within the braces Though, None of these features are 
+    mandatory and you may choose to replace this single annotation by any of the features that it enables.
+    
+==> To launch a Spring boot application, we just need the contextPath http:/localhost:8080/{requestMapping of Method}
+    But in case we want to add contextPath we can add it in appplication.properties file as follows :
+               server.contextPath = /myApp.
+    Now the application would be accessed as follows : http:/localhost:8080/myApp/{requestMapping of Method}
+    (See Project SpringBootHelloWorld)
+    
+==> Spring boot application can be run as a stand alone jar file(Click and Run) 
+    unlike a war file that has to be deployed in Tomcat folder. It runs as a stand alone jar 
+    with an embedded servlet container.
+    
+==> When we run maven clean and install, by default we get a jar file so we do not need to add 
+    <packaging>jar</packaging> tag in pom.xml. Following plugin is required in pom.xml to make that jar
+    executable.
+           <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+     We can directly run the jar file from command line using the command java -jar abcd.jar(because the 
+     tomcat is automatically included in the jar file) provided that jdk must be in the class path
+     
+==> For any reason, we want a war to be created and deployed into Tomcat server folder as we generally do instead
+    of a jar file, we need to add <packaging>war</packaging> in pom.xml with the following dependency:
+                <dependency>
+        				<groupId>org.springframework.boot</groupId>
+        				<artifactId>spring-boot-starter-tomcat</artifactId>
+        				<scope>provided</scope>
+    			</dependency>
+    Now the war file can be put into any server and run from command prompt.
+    
+==> Default port for Tomcat is 8080. But we can overwrite any default property of Spring Boot by mentioning
+    "application.properties" file in resources folder. For EX server.port = 8087 in application.properties
+    
+==> if any changes done on the server side we do not need to restart the server to reflect the changes, nor
+    do we need to refresh the URL. It will be refreshed automatically. For this we must keep the "Build 
+    Automatically" option checked and add following dependency in pom.xml
+                  <dependency>
+                       <groupId>org.springframework.boot</groupId>
+                       <artifactId>spring-boot-devtools</artifactId>
+                       <optional>true</optional>
+                  </dependency>
+                  
+   
+==> With a Spring Boot Application, you can generate an application jar which contains Embedded Tomcat server. 
+    You can run a web application as a normal Java application!
+                      
+==> The spring boot framework supports three different types of embedded servlet containers: 
+    Tomcat (default), Jetty and Undertow.
+    
+==> In case we want to deploy our application on Jetty instead of Tomcat, add the following dependency:
+         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+(** Refer project SpringBootJettyServer)
+Similarly if we need to use undertow server :
+  			<dependency>
+    				<groupId>org.springframework.boot</groupId>
+    				<artifactId>spring-boot-starter-web</artifactId>
+    				<exclusions>
+        				<exclusion>
+            				<groupId>org.springframework.boot</groupId>
+            			<artifactId>spring-boot-starter-tomcat</artifactId>
+        				</exclusion>
+    				</exclusions>
+			</dependency>
+			<dependency>
+    				<groupId>org.springframework.boot</groupId>
+    				<artifactId>spring-boot-starter-undertow</artifactId>
+			</dependency>
+
+==> Dispatcher-servlet and web.xml are not required in an Spring Boot Application. 
+    We can go for a configuration file inside resources folder and provide its location as follows: 
+    			@ImportResource("classpath:app-config.xml") with @SpringBootApplication tag
+    Refer SpringBootXML project
+    

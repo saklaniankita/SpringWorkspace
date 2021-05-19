@@ -1,0 +1,67 @@
+=>http://localhost/8080 => localhost is ip address of local  machine. When server and client are on the same machine,
+then we say it is the local  machine that we host are application to, so we use localhost
+=>localhost refers to "this computer" or even more accurately "the computer I'm working on." 
+=>localhost uses the IP address 127.0.0.1. so http://localhost/8080 is equivalent to http://127.0.0.1/8080
+=>port no. 8080 tells the browser to connect to tcp port 8080
+Default port no is 80
+
+->Core Java usually refers to Java SE which consists of the Java Language,the JVM and JDK (which itself contains the compiler 
+  some tools and a pretty large library).
+->Java SE is used for general purpose programming and almost anything written in Java is based on the Core Java.
+->J2EE is the API built on top of the SE API to provide the tools necessary to do large scale projects more easily.
+->Java SE stands for Java standard edition and is normally for developing desktop applications, forms the core/base API.
+->Java EE stands for Java enterprise edition for applications which run on servers, for example web sites.
+->Java is OOP language. Using java you can write standalone command line programs. When combined with tooling libs like Swing 
+  you can build GUI based desktop application.
+->J2EE is a set of specifications which targets the enterprise technologies like JMS, WS, Servlets, JSP, EJB’s etc. 
+  Most of these specification are implemented using Java. Using J2EE technology stack you can write complex business application.
+
+
+@SpringBootApplication does the following:
+1. It indicates that this class is a spring context file
+2. It enables Auto Configuration : See SpringBootProjectApplication.java
+3. It enables Component scan : It will start scanning current package and all sub packages for any beans marked by
+   annotations like @Component, @Controller, @RestController, @Service, @Repository so that they are managed by spring
+   framework 
+   
+   
+SpringApplication.run(SpringBootProjectApplication.class, args) : This method is used to run spring context 
+It also returns application context as follows:
+		Application Context context = SpringApplication.run(SpringBootProjectApplication.class, args); //Look into code
+		
+		
+Auto Configuration : Spring boot looks at 1)the jars present in the classpath
+										  2)Existing Configuration of the application
+Based on these two it will provide basic configuration needed to configure the app.
+
+
+Spring boot application starters:
+1.			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+			</dependency>
+
+This dependency is to develop Web & Restful applications
+
+
+2.			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
+		    </dependency>
+
+This is for Unit & Integration testing
+
+
+3.           <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+		    </dependency>
+		    
+This is for Spring Data JPA with Hibernate
+
+4.			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+		    </dependency>
+This is for Actuator

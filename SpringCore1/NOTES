@@ -1,0 +1,63 @@
+==> FileSystemXmlApplicationContext class is used when the configuration file outside the project
+			FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("classpath:applicationContext.xml");
+			
+==> ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+	Used when configuration file is within the project	
+	
+==> AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(App.class);
+    when do not use any configuration file at all. And configuration is done in the .java files through annotations.
+    XML based configuration(Dispatcher-servlet.xml) is being redundant slowly because changes made by different developers
+    working on the same file can lead to conflicts.
+
+    
+==> @scope("Singleton") : specifies that the object would be singleton. Default value for @scope is singleton only
+          UserService us1=(UserService) context.getBean("userServiceImpl");
+          UserService us2=(UserService) context.getBean("userServiceImpl");
+    us1 and us2 would give same hashcode values.
+    @scope("prototype") : specifies that the object would be different every time.
+    us1 and us2 would give different hashcode values.
+  
+==> @ComponentScan("com.example.candidjaca") in .java file is equivalent to 
+    <context:component-scan base-package="com.example.candidjava" /> in xml file.
+    
+==> The class you want to autowire with @Autowire must have one of the following annotations : 
+    @Component, @Controller, @Service, @Repository
+      
+==> @Configuration: Used to indicate that a class declares one or more @Bean methods.
+    These classes are processed by the Spring container to generate bean definitions and 
+    service requests for those beans at runtime. Any class that has methods with @Bean tag 
+    must be annotated with @Configuration
+    
+==> myString in UserServiceImpl has been declared with @Autowired annotation.
+    And since we can't add @Component tag in String class and neither can we mention the bean tag in xml file
+    we have used @Bean annotation above a method that provides myString a value, we achieve it the following way
+            @Bean
+      		public String myStringmethod()
+      			{
+        			 return "ankita";
+    			 } 
+    Otherwise for internal classes, we easily achieve it using @Autowired and @Component annotations
+
+==> Classes that fall under the package mentioned @ComponentScan do not use a @Bean tag
+    Because these are internal classes. @Bean tag will be required for classes which are outside ComponentScan package
+    such as String, SessionFactory etc.
+    			 
+==> @Bean annotation also can be used with parameters like name, initMethod and destroyMethod.
+    name – allows you give name for bean
+    initMethod – allows you to choose method which will be invoked on context register
+    destroyMethod – allows you to choose method which will be invoked on context shutdown
+    @Bean(name = "comp", initMethod = "turnOn", destroyMethod = "turnOff").
+
+==> @PostConstruct : When we annotate a method in Spring Bean with @PostConstruct annotation, 
+    it gets executed after the spring bean is initialized.
+    We can have only one method annotated with @PostConstruct annotation
+
+
+****There are few annotations do not get confused with them:
+  1. @ComponentScan(package name where all @component tagged classes will be found) 
+  2. @Component(@Controller, @Service, @Repository: Used for classes that needs to be autowired)
+  3. @Configuration(With @Bean tag),
+  4. @Autowire (can be used only with classes tagged with @Component,@Controller, @Service, @Repository)
+    
+
+    			 

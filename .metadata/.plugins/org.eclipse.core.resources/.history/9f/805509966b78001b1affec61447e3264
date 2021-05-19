@@ -1,0 +1,47 @@
+-> Jackson jar converts bean to JSON and vice versa
+
+-> @ResponseStatus: can be used at class level or method level
+	class level: as used in UserNotFoundException.java with HttpStatus and reason(OPTIONAL) as arguments
+				 We can even use it at a controller class, that way it will be applied to all methods
+	Method level: 
+				@RequestMapping(method = RequestMethod.POST)
+				@ResponseStatus(HttpStatus.CREATED)
+				public void storeEmployee(@RequestBody Employee employee) {
+   										 ...
+				}
+	There is always a default Response status and code whenever a method executes.
+	It is shown on the REST Client when the method executes.
+    But that can be overridden by @ResponseStatus annotation as shown above
+
+   
+-> To test Exception classes
+1. First remove MyResponseEntityExceptionHandler.java from build path
+   and comment @ResponseStatus(value = HttpStatus.NOT_FOUND) in UserNotFoundException.java
+   and request URL with invalid id and/OR name; Observe result
+2. Now uncomment @ResponseStatus(value = HttpStatus.NOT_FOUND) in UserNotFoundException.java
+   and request URL with invalid id and/OR name; Observe result
+3. Now include MyResponseEntityExceptionHandler.java in build path
+   and request URL with invalid id and/OR name; Observe result
+   
+   
+    
+=> @ControllerAdvice: This annotation is used for Exception handling in Spring framework
+   ->@ControllerAdvice annotation is used to handle the exceptions that are thrown from any 
+     spring controller defined in the application
+   ->@ExceptionHandler is used to differentiate between different kinds of exceptions
+   ->By default, the methods in an @ControllerAdvice apply globally to all controllers. 
+     Use selectors such as annotations, basePackageClasses, and basePackages (or its alias value) 
+     to define a more narrow subset of targeted controllers.
+     
+     In the given example, We are using RestController, so the return type for all exception handler methods
+     is ResponseEntity<>. But we can return other classes as well. For ex: ModelAndView object
+     if it is an MVC web application instead of a WebService
+     
+=>Validation to arguments can be added using @Valid. It needs following depedency
+							<dependency>
+								<groupId>org.springframework.boot</groupId>
+								<artifactId>spring-boot-starter-validation</artifactId>
+							</dependency> 
+	If any validation fails, that can be handled by overriding handleMethodArgumentNotValid() method of 
+	class ResponseEntityExceptionHandler class. 
+  

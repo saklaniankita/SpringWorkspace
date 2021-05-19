@@ -1,0 +1,31 @@
+@Configuration : shows that this class is a replacement of a configuration xml file.
+				 Indicates that a class declares one or more @Bean methods and may be 
+				 processed by the Spring container 
+@EnableWebMvc : Adding this annotation to an @Configuration class imports the Spring MVC 
+                configuration from WebMvcConfigurationSupport
+@ComponentScan : Provides support parallel with Spring XML's <context:component-scan> element. 
+@EnableTransactionManagement : Enables Spring's annotation-driven transaction management capability, 
+             similar to the support found in Spring's <tx:annotation-driven/> in XML file
+@Import : Allows for importing @Configuration classes
+@EnableWebSecurity : Add this annotation to an @Configuration class to have the Spring Security configuration 
+                     defined in any WebSecurityConfigurer or more likely by extending the WebSecurityConfigurerAdapter
+                     base class and overriding individual methods.
+                     
+==>@Autowire annotation over methods : The @autowired method you have provided does not need to be invoked 
+   from within your own code. It will be invoked by the Spring framework
+                     
+==> AppConfig.java & SecuirtyConfig.java class methods are executed before the request is mapped to controller
+    A "POST" request from .jsp page is intercepted by the Spring Security framework(configure method of 
+    the class that extends WebSecurityConfigurerAdapter) which checks for the action, username, password, 
+    etc and then forwards the request to the controller as a GET request.
+    The controller then forwards the view back to front end. 
+    In case there is  nothing that matches the POST request coming from the jsp page, the request
+    directly goes to the controller and from controller back to the view.
+    
+
+==> SpringMvcInitializer : Till now we have seen two cases where we replace web.xml with .java classes
+         i) A class that implements WebApplicationInitializer interface(Ex: SpringWebIntializer.java 
+         in Spring4HelloWorld project). This interface was introduces in Spring 3.1
+         ii)A class that extends  AbstractAnnotationConfigDispatcherServletInitializer class.
+         In this project SpringMvcInitializer extends the above class and hence is the replacement for web.xml.
+         It has got three abstract methods to implement(refer SpringMvcInitializer.java) 

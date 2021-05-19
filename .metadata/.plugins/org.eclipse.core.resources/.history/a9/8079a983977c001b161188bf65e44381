@@ -1,0 +1,12 @@
+package com.example.REST.user;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class FilteringControler {
+	
+	public void filtering() {
+		FilteringBean bean = FilteringBean.builder().value1("one").value2("two").value3("three").value4("four").build();
+	}
+
+}

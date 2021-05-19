@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.example.RESTapp.JPArepository&apos; to &apos;com.example.RESTapp.JPA&apos;&#x0A;- Original project: &apos;RESTful-Webservice2021&apos;&#x0A;- Original element: &apos;RESTful-Webservice2021/src/main/java/com.example.RESTapp.JPArepository&apos;&#x0A;- Renamed element: &apos;RESTful-Webservice2021/src/main/java/com.example.RESTapp.JPA&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.example.RESTapp.JPArepository&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.RESTapp.JPArepository" name="com.example.RESTapp.JPA" qualified="false" references="true" stamp="1616436567240" textual="false" version="1.0"/>
+</session>

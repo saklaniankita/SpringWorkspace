@@ -1,0 +1,32 @@
+***Java SE's API provides the core functionality of the Java programming language.
+The Java EE platform is built on top of the Java SE platform. The Java EE platform 
+provides an API and runtime environment for developing and running large-scale, 
+multi-tiered(client-server), scalable, reliable, and secure network applications.
+
+***PLUMBING CODE: code that does solve the actual purpose but is still critical like commit() & rollback() while handling
+database transactions and connect() while opening database connection.
+
+***Web Application vs Web Service : Web Application is basically based on client-server architecture just like any website
+which runs on the browser where the client sees the UI , sends a request to the server, receives a web 
+page as a result from the server.
+
+Web Service is there to assist web applications. They do NOT have any UI are not supposed to be used by humans
+
+
+
+=>Why is spring useful
+	-> It makes us write loosely coupled code
+	-> It helps us manage beans(using @Component) & their dependencies(using @Autowire)
+	-> It lets us write testable code if DEpendency Injection is properly used. 
+	-> It has good integration with JUnit and MOCKito
+	-> Spring framework takes care of all the PLUMBING CODE and thus reduce the number of lines of code
+	   all of Spring exceptions are unchecked so, we do not need to write try catch block for exception handling
+	-> It has flexible architecture has good integration with others frameworks like MVC, hibernate , struts etc
+	
+=> Why is Spring MVC helpful
+   -> It lets us develop decoupled "Web applications" using spring framework
+   
+=> Why is Spring Boot helpful
+   -> It enables auto Configuration
+   -> We do not need Dispatcher-servlet.xml file. All the configurations are done through annotations
+   -> Lesser no. of lines of code

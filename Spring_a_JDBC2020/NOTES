@@ -1,0 +1,58 @@
+=>H2 is "in memory"  database
+  It is on the web and is accessed by a URL
+  It is live till the application is running
+  Once you kill the application, the database also gets killed
+  But it is easy to connect, start & maintain unlike mysql and oracle
+
+=> CommandLineRunner is one of the interfaces present in Spring Boot
+   It has an unimplemented method called run
+   Run method is called when the application context is ready 
+
+=> JDBCTemplate class is provided by spring framework : org.springframework.jdbc.core.JdbcTemplate
+   It makes the code far simpler and shorter.
+   Earlier we were using JDBC instead of Spring JDBC as follows:
+   
+   							public static void main(String[] args) {
+									    ResultSet rs = null;
+									    Connection conn = null;
+									    PreparedStatement pstmt = null;
+									    try {
+									      conn = getConnection();
+									      String query = "select deptno, deptname, deptloc from dept where deptno > ?";
+									
+									      pstmt = conn.prepareStatement(query); // create a statement
+									      pstmt.setInt(1, 1001); // set input parameter
+									      rs = pstmt.executeQuery();
+									      // extract data from the ResultSet
+									      while (rs.next()) {
+									        int dbDeptNumber = rs.getInt(1);
+									        String dbDeptName = rs.getString(2);
+									        String dbDeptLocation = rs.getString(3);
+									        System.out.println(dbDeptNumber + "\t" + dbDeptName + "\t" + dbDeptLocation);
+									      }
+									    } catch (Exception e) {
+									      e.printStackTrace();
+									    } finally {
+									      try {
+									        rs.close();
+									        pstmt.close();
+									        conn.close();
+									      } catch (SQLException e) {
+									        e.printStackTrace();
+									      }
+									    }
+							}
+							
+With Spring JdbcTemplate, we do not have to worry about exception handling, Connection set up and closing, etc
+If the names of attributes and columns are same, no mapping is needed but otherwise a RowMapper has to be implemented
+
+=> JPA = Java Persistence API
+			It defines a set of annotations(@Entity, @Id, etc) and set of interfaces for ORM
+			Thus  JPA permits the developer to work directly with objects rather than with SQL statements
+			Hibernate is the most popular implementation of JPA
+			
+JPA vs SpringJDBC => In SpringJdbc we have to implement RowMapper to map attributes to column names in case they are different
+					But in JPA , this is achieved simply through annotations
+					
+In Spring JDBC or conventional JDBC you need to map the values to the query 
+			
